@@ -1,0 +1,16 @@
+{
+  "name": "Pedidos Clube dos 12",
+  "short_name": "Pedidos C12",
+  "description": "Pedidos de locação de materiais da Chácara Clube dos 12",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F4F2E9",
+  "theme_color": "#475B2A",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
