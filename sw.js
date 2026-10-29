@@ -1,5 +1,5 @@
 // Guarda o app no aparelho para abrir sem internet.
-const CACHE = "pedidos-c12-v1";
+const CACHE = "pedidos-c12-v2";
 const ARQUIVOS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-180.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ARQUIVOS))); self.skipWaiting(); });
 self.addEventListener("activate", e => {

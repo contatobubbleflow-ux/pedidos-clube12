@@ -455,7 +455,10 @@ header.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .secao h3{margin:0;font:700 12px var(--f-texto);letter-spacing:.12em;text-transform:uppercase;color:var(--verde)}
 .grade{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
 .c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}
-@media (max-width:640px){.grade{grid-template-columns:1fr 1fr}.c2,.c3{grid-column:span 1}.c4,.c6{grid-column:span 2}}
+@media (max-width:640px){.grade{grid-template-columns:1fr 1fr}.c2,.c3{grid-column:span 1}.c4,.c6,.cm2{grid-column:span 2}}
+input[type="date"]{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%;min-height:42px;text-align:left}
+input[type="date"]::-webkit-date-and-time-value{text-align:left}
+@media (max-width:640px){body.digitando .acoes{display:none}}
 .campo{display:flex;flex-direction:column;gap:4px;min-width:0}
 .campo label{font-size:12.5px;font-weight:600;color:var(--suave)}
 input,select,textarea{font:inherit;color:var(--tinta);background:var(--campo);border:1px solid var(--linha);border-radius:8px;padding:9px 10px;min-width:0;width:100%}
@@ -564,9 +567,9 @@ body{margin:0}
       <div class="secao">
         <h3>Cliente e evento</h3>
         <div class="grade">
-          <div class="campo c2"><label for="fDataEvento">Data do evento</label><input type="date" id="fDataEvento"></div>
-          <div class="campo c2"><label for="fDataPedido">Data do pedido</label><input type="date" id="fDataPedido"></div>
-          <div class="campo c2"><label for="fStatus">Situação</label>
+          <div class="campo c2 cm2"><label for="fDataEvento">Data do evento</label><input type="date" id="fDataEvento"></div>
+          <div class="campo c2 cm2"><label for="fDataPedido">Data do pedido</label><input type="date" id="fDataPedido"></div>
+          <div class="campo c2 cm2"><label for="fStatus">Situação</label>
             <select id="fStatus">
               <option value="orcamento">Orçamento</option>
               <option value="reservado">Reservado (sinal pago)</option>
@@ -575,9 +578,9 @@ body{margin:0}
               <option value="cancelado">Cancelado</option>
             </select></div>
           <div class="campo c4"><label for="fNome">Nome</label><input id="fNome" placeholder="Nome completo do cliente"></div>
-          <div class="campo c2"><label for="fTelefone">Telefone / WhatsApp</label><input id="fTelefone" inputmode="tel" placeholder="(43) 9 0000-0000"></div>
+          <div class="campo c2 cm2"><label for="fTelefone">Telefone / WhatsApp</label><input id="fTelefone" inputmode="tel" placeholder="(43) 9 0000-0000"></div>
           <div class="campo c4"><label for="fEndereco">Endereço</label><input id="fEndereco"></div>
-          <div class="campo c2"><label for="fDocumentos">Documentos</label><input id="fDocumentos" placeholder="CPF / RG"></div>
+          <div class="campo c2 cm2"><label for="fDocumentos">Documentos</label><input id="fDocumentos" placeholder="CPF / RG"></div>
           <div class="campo c6"><label for="fEntrega">Endereço da entrega</label><input id="fEntrega"></div>
         </div>
       </div>
@@ -1040,6 +1043,11 @@ function trocarAba(a){
 }
 $("tabNovo").onclick = () => trocarAba("novo");
 $("tabSalvos").onclick = () => trocarAba("salvos");
+
+/* ---------- celular: esconde os botões enquanto o teclado está aberto ---------- */
+const ehCampo = el => el && (el.tagName==="TEXTAREA" || (el.tagName==="INPUT" && !["button","submit","checkbox","radio","file"].includes(el.type)));
+document.addEventListener("focusin", e => { if (ehCampo(e.target)) document.body.classList.add("digitando"); });
+document.addEventListener("focusout", () => setTimeout(() => { if (!ehCampo(document.activeElement)) document.body.classList.remove("digitando"); }, 120));
 
 /* ---------- início ---------- */
 const rasc = lsGet("rascunho");
